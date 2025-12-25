@@ -1,5 +1,5 @@
 :root {
-  --bg: #1a3a2a; /* Fondo verde oscuro */
+  --bg: #4b6cb7; /* Fondo azul */
   --panel: rgba(255, 255, 255, 0.06);
   --stroke: rgba(255, 255, 255, 0.10);
   --text: rgba(255, 255, 255, 0.92);
@@ -14,7 +14,7 @@ body {
   background: radial-gradient(1200px 800px at 15% 10%, rgba(34, 193, 195, 0.35), transparent 60%), 
               radial-gradient(900px 700px at 90% 20%, rgba(40, 180, 99, 0.28), transparent 55%), 
               radial-gradient(800px 700px at 40% 95%, rgba(107, 204, 85, 0.20), transparent 55%), 
-              #4b6cb7; /* Fondo azul */
+              var(--bg); /* Mantener el formato y cambiar solo el fondo */
   min-height: 100vh;
   padding: 18px;
 }
