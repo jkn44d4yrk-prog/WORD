@@ -1,25 +1,114 @@
-/* Agrega tu código CSS aquí para dar estilo a las pantallas y botones */
+/* Estilo general del cuerpo */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Contenedores principales */
 #login, #menu, #test {
   max-width: 600px;
   margin: auto;
   padding: 20px;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
+/* Estilo de los botones */
 button {
   width: 100%;
   padding: 10px;
-  margin: 5px 0;
+  margin: 10px 0;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 button:disabled {
   background-color: #ddd;
   cursor: not-allowed;
+}
+
+/* Estilo del formulario de login */
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Mensajes de error */
+#loginError {
+  margin-top: 10px;
+  color: #ffb4b4;
+  display: none;
+  font-size: 0.9rem;
+}
+
+/* Estilos del test */
+#test h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.test-topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#backToMenuBtn, #logoutBtnTest {
+  background-color: #f44336;
+  border-radius: 5px;
+}
+
+#backToMenuBtn:hover, #logoutBtnTest:hover {
+  background-color: #e53935;
+}
+
+/* Opciones de respuesta */
+#options button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+#options button:hover {
+  background-color: #1976D2;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 1rem;
+  }
 }
