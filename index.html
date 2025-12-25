@@ -10,18 +10,15 @@
 
 <h1>Cuestionario FM 2026</h1>
 
-<!-- Formulario de inicio de sesión -->
 <div id="login">
   <input id="email" type="email" placeholder="Email" autocomplete="email">
   <input id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
   <div id="loginError" style="margin-top:10px; color:#ffb4b4; display:none;"></div>
-  <button onclick="handleLogin()">Entrar</button>
+  <button onclick="login()">Entrar</button>
 </div>
 
-<!-- Menú principal -->
 <div id="menu" style="display:none"></div>
 
-<!-- Test -->
 <div id="test" style="display:none">
   <div class="test-topbar">
     <button id="backToMenuBtn" type="button">← Menú</button>
@@ -33,17 +30,14 @@
   <button id="nextBtn" disabled>Siguiente</button>
 </div>
 
-<!-- Mensajes bloqueados -->
 <div id="blockMsg" style="display:none"></div>
 
-<!-- Cargar Firebase SDK (tradicional) -->
-<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // Configuración de Firebase con las nuevas credenciales
+  // Nueva configuración de Firebase con las credenciales actualizadas
   const firebaseConfig = {
     apiKey: "AIzaSyA8Cx38i-rvc-RX4zaEU8b2_ONVj7Rfy2Y",
     authDomain: "word-3bcb4.firebaseapp.com",
@@ -54,102 +48,13 @@
     measurementId: "G-HE9V9DTEZB"
   };
 
-  // Inicializa Firebase
-  const app = firebase.initializeApp(firebaseConfig);
-  const analytics = firebase.analytics(app);
-  const auth = firebase.auth();  // Inicializa Firebase Authentication
-  const db = firebase.firestore(); // Inicializa Firestore
-
-  // ===================== FUNCIONES DE MENÚ Y TEST =====================
-
-  // Mostrar el menú principal
-  function showMenu() {
-    const loginEl = document.getElementById("login");
-    const menuEl = document.getElementById("menu");
-    const testEl = document.getElementById("test");
-    const blockMsgEl = document.getElementById("blockMsg");
-
-    loginEl.style.display = "none";
-    testEl.style.display = "none";
-    blockMsgEl.style.display = "none";
-    menuEl.style.display = "block";
-
-    menuEl.innerHTML = "";  // Limpiar el contenido del menú
-    const h2 = document.createElement("h2");
-    h2.textContent = "Selecciona un bloque de preguntas";
-    menuEl.appendChild(h2);
-
-    // Agregar bloques de preguntas al menú
-    const blockButton = document.createElement("button");
-    blockButton.textContent = "Bloque 1";
-    blockButton.onclick = () => startTest();
-    menuEl.appendChild(blockButton);
-  }
-
-  // Iniciar el cuestionario
-  function startTest() {
-    const menuEl = document.getElementById("menu");
-    const testEl = document.getElementById("test");
-
-    // Ocultar el menú
-    menuEl.style.display = "none";
-    testEl.style.display = "block";
-
-    // Cargar las preguntas
-    currentBlock = getBlockQuestions(currentIndex);
-    showQuestion(currentIndex);
-  }
-
-  // ===================== FUNCIONES DE AUTENTICACIÓN =====================
-
-  // Cambiar nombre de la función para evitar conflicto con el ID 'login'
-  async function handleLogin() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    try {
-      const userCredential = await auth.signInWithEmailAndPassword(email, password);
-      console.log("Usuario autenticado:", userCredential.user);
-      showMenu();  // Mostrar el menú después de autenticarse
-    } catch (error) {
-      console.error("Error al iniciar sesión:", error.message);
-      showLoginError(error.message);  // Mostrar mensaje de error en la interfaz
-    }
-  }
-
-  // Mostrar error de inicio de sesión
-  function showLoginError(msg) {
-    const loginErrorEl = document.getElementById("loginError");
-    loginErrorEl.style.display = "block";
-    loginErrorEl.textContent = msg;
-  }
-
-  // Mostrar la pantalla de login
-  function showLoginScreen() {
-    const loginEl = document.getElementById("login");
-    const menuEl = document.getElementById("menu");
-    const testEl = document.getElementById("test");
-    const blockMsgEl = document.getElementById("blockMsg");
-
-    loginEl.style.display = "block";
-    testEl.style.display = "none";
-    menuEl.style.display = "none";
-    blockMsgEl.style.display = "none";
-  }
-
-  // Cerrar sesión
-  async function logout() {
-    try {
-      await auth.signOut();
-      alert('Has cerrado sesión');
-      showLoginScreen();  // Mostrar la pantalla de login nuevamente
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error.message);
-    }
-  }
+  // Inicialización de Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
 </script>
 
-<script src="questions.js?v=3"></script>  <!-- Asegúrate de que questions.js esté cargado antes -->
+<script src="questions.js?v=3"></script>
 <script src="app.js?v=3"></script>
 
 </body>
