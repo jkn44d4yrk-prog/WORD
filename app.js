@@ -1,7 +1,7 @@
-// Inicialización de la variable de estad
+// Inicialización de la variable de estado
 let state = { history: [], attempts: {} };
 
-// Asegúrate de que las demás variables también se definan antes de su uso:
+// Variables para manejar el flujo de preguntas
 let currentBlock = [];
 let currentIndex = 0;
 const BLOCK_SIZE = 10;
