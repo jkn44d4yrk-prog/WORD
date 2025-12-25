@@ -1,28 +1,28 @@
-// questions.js (autogenerado por convert.js)
-// Fuente: preguntas.txt
-
 const questions = [
   {
-    "id": 1,
-    "question": "1. ¿Cuál es la función principal de la barra de herramientas de acceso rápido en Word 365?",
-    "options": {
-      "A": "Permitir la personalización de las herramientas más usadas.",
-      "B": "Mostrar la vista previa de impresión.",
-      "C": "Mostrar los documentos recientes.",
-      "D": "Acceder al menú de ayuda."
+    id: 1,
+    question: "¿Cuál es la función principal de la barra de herramientas de acceso rápido en Word 365?",
+    options: {
+      A: "Permitir la personalización de las herramientas más usadas.",
+      B: "Mostrar la vista previa de impresión.",
+      C: "Mostrar los documentos recientes.",
+      D: "Acceder al menú de ayuda."
     },
-    "correct": "A"
+    correct: "A"
   },
   {
-    "id": 2,
-    "question": "2. ¿Cómo puedes cambiar el estilo de todo el documento en Word 365?",
-    "options": {
-      "A": "Modificando cada párrafo individualmente.",
-      "B": "Usando los estilos rápidos de la cinta de opciones.",
-      "C": "Cambiando las configuraciones de impresión.",
-      "D": "Utilizando la barra de búsqueda."
+    id: 2,
+    question: "¿Qué hace la opción 'Guardar como' en Word 365?",
+    options: {
+      A: "Guarda el archivo con el mismo nombre.",
+      B: "Guarda el archivo en un formato diferente.",
+      C: "Cierra el documento.",
+      D: "Abre un nuevo documento."
     },
-    "correct": "B"
+    correct: "B"
+  },
+  // Puedes agregar más preguntas aquí...
+];
   },
   {
     "id": 3,
