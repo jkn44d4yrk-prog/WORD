@@ -4,8 +4,6 @@ let state = { history: [], attempts: {} };
 // Asegúrate de que las demás variables también se definan antes de su uso:
 let currentBlock = [];
 let currentIndex = 0;
-
-// Definir el tamaño de los bloques de preguntas
 const BLOCK_SIZE = 10;
 
 // Función para cargar las preguntas en un bloque
@@ -20,7 +18,7 @@ function showQuestion(index) {
   const optionsEl = document.getElementById("options");
 
   questionEl.textContent = question.question;
-  optionsEl.innerHTML = "";  // Limpiar las opciones anteriores
+  optionsEl.innerHTML = "";
 
   for (const [key, option] of Object.entries(question.options)) {
     const button = document.createElement("button");
@@ -35,14 +33,12 @@ function selectAnswer(index, selectedOption) {
   const question = questions[index];
   const correct = question.correct;
 
-  // Guardar la respuesta seleccionada en el estado
   state.history.push({
     questionId: question.id,
     selected: selectedOption,
     correct: correct
   });
 
-  // Deshabilitar los botones y pasar a la siguiente pregunta
   document.querySelectorAll("#options button").forEach(button => button.disabled = true);
   document.getElementById("nextBtn").disabled = false;
 
@@ -56,8 +52,7 @@ function selectAnswer(index, selectedOption) {
 // Función para ir a la siguiente pregunta
 function nextQuestion() {
   currentIndex++;
-  
-  // Verifica que no estemos fuera de los límites del array de preguntas
+
   if (currentIndex < questions.length) {
     showQuestion(currentIndex);
   } else {
