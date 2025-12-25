@@ -10,6 +10,7 @@
 
 <h1>Cuestionario FM 2026</h1>
 
+<!-- Formulario de inicio de sesión -->
 <div id="login">
   <input id="email" type="email" placeholder="Email" autocomplete="email">
   <input id="password" type="password" placeholder="Contraseña" autocomplete="current-password">
@@ -17,8 +18,10 @@
   <button onclick="login()">Entrar</button>
 </div>
 
+<!-- Menú principal -->
 <div id="menu" style="display:none"></div>
 
+<!-- Test -->
 <div id="test" style="display:none">
   <div class="test-topbar">
     <button id="backToMenuBtn" type="button">← Menú</button>
@@ -30,24 +33,132 @@
   <button id="nextBtn" disabled>Siguiente</button>
 </div>
 
+<!-- Mensajes bloqueados -->
 <div id="blockMsg" style="display:none"></div>
 
+<!-- Cargar Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 
 <script>
+  // Configuración de Firebase
   const firebaseConfig = {
-    apiKey: "AIzaSyBg6x6x0BS1m9ysIsk-ADAn0QM_8z0dddI",
-    authDomain: "test-2026-d2d80.firebaseapp.com",
-    projectId: "test-2026-d2d80",
-    storageBucket: "test-2026-d2d80.firebasestorage.app",
-    messagingSenderId: "711197555818",
-    appId: "1:711197555818:web:76cc8993337e1085b09e13"
+    apiKey: "AIzaSyA8Cx38i-rvc-RX4zaEU8b2_ONVj7Rfy2Y",
+    authDomain: "word-3bcb4.firebaseapp.com",
+    projectId: "word-3bcb4",
+    storageBucket: "word-3bcb4.firebasestorage.app",
+    messagingSenderId: "933335373972",
+    appId: "1:933335373972:web:cba07eb5e8b64949b0fc81",
+    measurementId: "G-F4QSBQLS5T"
   };
-  firebase.initializeApp(firebaseConfig);
+
+  // Inicializa Firebase
+  const app = firebase.initializeApp(firebaseConfig);
+  const analytics = firebase.analytics(app);
   const auth = firebase.auth();
   const db = firebase.firestore();
+
+  // =================== FUNCIONES DE AUTENTICACIÓN ===================
+  
+  // Iniciar sesión con correo y contraseña
+  async function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      alert('Inicio de sesión exitoso');
+      showMenu();  // Muestra el menú después de iniciar sesión
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error.message);
+      showLoginError(error.message);
+    }
+  }
+
+  // Mostrar error en el login
+  function showLoginError(msg) {
+    const loginErrorEl = document.getElementById("loginError");
+    loginErrorEl.style.display = "block";
+    loginErrorEl.textContent = msg;
+  }
+
+  // Limpiar el error del login
+  function clearLoginError() {
+    const loginErrorEl = document.getElementById("loginError");
+    loginErrorEl.style.display = "none";
+    loginErrorEl.textContent = "";
+  }
+
+  // Mostrar la pantalla de login
+  function showLoginScreen() {
+    const loginEl = document.getElementById("login");
+    const menuEl = document.getElementById("menu");
+    const testEl = document.getElementById("test");
+    const blockMsgEl = document.getElementById("blockMsg");
+    
+    loginEl.style.display = "block";
+    testEl.style.display = "none";
+    menuEl.style.display = "none";
+    blockMsgEl.style.display = "none";
+  }
+
+  // =================== FUNCIONES DE MENÚ Y TEST ===================
+  
+  // Mostrar el menú principal
+  function showMenu() {
+    const loginEl = document.getElementById("login");
+    const menuEl = document.getElementById("menu");
+    const testEl = document.getElementById("test");
+    const blockMsgEl = document.getElementById("blockMsg");
+    
+    loginEl.style.display = "none";
+    testEl.style.display = "none";
+    blockMsgEl.style.display = "none";
+    menuEl.style.display = "block";
+    
+    menuEl.innerHTML = "";  // Limpiar el contenido del menú
+    
+    // Aquí puedes añadir los bloques de preguntas y opciones dinámicamente
+    // (dependiendo de cómo quieras estructurarlo en el menú)
+    
+    const h2 = document.createElement("h2");
+    h2.textContent = "Selecciona un bloque de preguntas";
+    menuEl.appendChild(h2);
+  }
+
+  // Cerrar sesión
+  async function logout() {
+    try {
+      await auth.signOut();
+      alert('Has cerrado sesión');
+      showLoginScreen();  // Mostrar la pantalla de login nuevamente
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error.message);
+    }
+  }
+
+  // =================== FUNCIONES DE FIRESTORE ===================
+  
+  // Guardar progreso del usuario
+  async function saveProgress(user) {
+    try {
+      await db.collection("progress").doc(user.uid).set(state);
+    } catch (error) {
+      console.error("Error al guardar el progreso:", error);
+    }
+  }
+
+  // Cargar el progreso del usuario
+  async function loadProgress(user) {
+    try {
+      const doc = await db.collection("progress").doc(user.uid).get();
+      state = doc.exists ? doc.data() : {};
+    } catch (error) {
+      console.error("Error al cargar el progreso:", error);
+    }
+  }
+
 </script>
 
 <script src="questions.js?v=3"></script>
