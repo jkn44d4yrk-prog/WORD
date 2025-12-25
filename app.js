@@ -6,6 +6,13 @@ let currentBlock = [];
 let currentIndex = 0;
 const BLOCK_SIZE = 10;
 
+// Verificar si 'questions' está definida
+if (typeof questions === 'undefined' || questions.length === 0) {
+  console.error("Las preguntas no están definidas o están vacías.");
+} else {
+  console.log("Preguntas cargadas correctamente.");
+}
+
 // Función para cargar las preguntas en un bloque
 function getBlockQuestions(startIndex) {
   return questions.slice(startIndex, startIndex + BLOCK_SIZE);
