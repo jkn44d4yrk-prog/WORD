@@ -119,9 +119,6 @@
     
     menuEl.innerHTML = "";  // Limpiar el contenido del menú
     
-    // Aquí puedes añadir los bloques de preguntas y opciones dinámicamente
-    // (dependiendo de cómo quieras estructurarlo en el menú)
-    
     const h2 = document.createElement("h2");
     h2.textContent = "Selecciona un bloque de preguntas";
     menuEl.appendChild(h2);
@@ -153,7 +150,7 @@
   async function loadProgress(user) {
     try {
       const doc = await db.collection("progress").doc(user.uid).get();
-      state = doc.exists ? doc.data() : {};
+      state = doc.exists ? doc.data() : {}; // Si no hay datos, inicializa el estado vacío
     } catch (error) {
       console.error("Error al cargar el progreso:", error);
     }
