@@ -1,4 +1,4 @@
-// Inicialización de la variable de estado
+// Inicialización de la variable de estad
 let state = { history: [], attempts: {} };
 
 // Asegúrate de que las demás variables también se definan antes de su uso:
