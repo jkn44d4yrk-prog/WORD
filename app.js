@@ -4,7 +4,7 @@ let state = { history: [], attempts: {} };
 // Variables para manejar el flujo de preguntas
 let currentBlock = [];
 let currentIndex = 0;
-const BLOCK_SIZE = 2;  // Mostramos 2 preguntas por bloque por ahora
+const BLOCK_SIZE = 10;
 
 // Verificar si 'questions' está definida
 if (typeof questions === 'undefined' || questions.length === 0) {
@@ -108,6 +108,43 @@ function startTest() {
   // Cargar las preguntas
   currentBlock = getBlockQuestions(currentIndex);
   showQuestion(currentIndex);
+}
+
+// ===================== FUNCIONES DE AUTENTICACIÓN =====================
+
+// Cambiar nombre de la función para evitar conflicto con el ID 'login'
+async function handleLogin() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    console.log("Usuario autenticado:", userCredential.user);
+    showMenu();  // Mostrar el menú después de autenticarse
+  } catch (error) {
+    console.error("Error al iniciar sesión:", error.message);
+    showLoginError(error.message);  // Mostrar mensaje de error en la interfaz
+  }
+}
+
+// Mostrar error de inicio de sesión
+function showLoginError(msg) {
+  const loginErrorEl = document.getElementById("loginError");
+  loginErrorEl.style.display = "block";
+  loginErrorEl.textContent = msg;
+}
+
+// Mostrar la pantalla de login
+function showLoginScreen() {
+  const loginEl = document.getElementById("login");
+  const menuEl = document.getElementById("menu");
+  const testEl = document.getElementById("test");
+  const blockMsgEl = document.getElementById("blockMsg");
+
+  loginEl.style.display = "block";
+  testEl.style.display = "none";
+  menuEl.style.display = "none";
+  blockMsgEl.style.display = "none";
 }
 
 // Cerrar sesión
