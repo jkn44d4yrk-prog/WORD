@@ -36,72 +36,32 @@
 <!-- Mensajes bloqueados -->
 <div id="blockMsg" style="display:none"></div>
 
-<!-- Cargar Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<!-- Cargar Firebase SDK (tradicional) -->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
 
 <script>
-  // Configuración de Firebase con las credenciales proporcionadas
+  // Configuración de Firebase con las nuevas credenciales
   const firebaseConfig = {
     apiKey: "AIzaSyA8Cx38i-rvc-RX4zaEU8b2_ONVj7Rfy2Y",
     authDomain: "word-3bcb4.firebaseapp.com",
     projectId: "word-3bcb4",
     storageBucket: "word-3bcb4.firebasestorage.app",
     messagingSenderId: "933335373972",
-    appId: "1:933335373972:web:cba07eb5e8b64949b0fc81",
-    measurementId: "G-F4QSBQLS5T"
+    appId: "1:933335373972:web:770039f1d508fae2b0fc81",
+    measurementId: "G-HE9V9DTEZB"
   };
 
   // Inicializa Firebase
   const app = firebase.initializeApp(firebaseConfig);
   const analytics = firebase.analytics(app);
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-
-  // =================== FUNCIONES DE AUTENTICACIÓN ===================
-  
-  async function login() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      alert('Inicio de sesión exitoso');
-      showMenu();
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error.message);
-      showLoginError(error.message);
-    }
-  }
-
-  function showLoginError(msg) {
-    const loginErrorEl = document.getElementById("loginError");
-    loginErrorEl.style.display = "block";
-    loginErrorEl.textContent = msg;
-  }
-
-  function clearLoginError() {
-    const loginErrorEl = document.getElementById("loginError");
-    loginErrorEl.style.display = "none";
-    loginErrorEl.textContent = "";
-  }
-
-  function showLoginScreen() {
-    const loginEl = document.getElementById("login");
-    const menuEl = document.getElementById("menu");
-    const testEl = document.getElementById("test");
-    const blockMsgEl = document.getElementById("blockMsg");
-    
-    loginEl.style.display = "block";
-    testEl.style.display = "none";
-    menuEl.style.display = "none";
-    blockMsgEl.style.display = "none";
-  }
-
+  const auth = firebase.auth();  // Inicializa Firebase Authentication
+  const db = firebase.firestore(); // Inicializa Firestore
 </script>
 
-<script src="questions.js?v=3"></script>
+<script src="questions.js?v=3"></script>  <!-- Asegúrate de que questions.js esté cargado antes -->
 <script src="app.js?v=3"></script>
 
 </body>
