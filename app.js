@@ -4,7 +4,7 @@ let state = { history: [], attempts: {} };
 // Variables para manejar el flujo de preguntas
 let currentBlock = [];
 let currentIndex = 0;
-const BLOCK_SIZE = 10;
+const BLOCK_SIZE = 2;  // Mostramos 2 preguntas por bloque por ahora
 
 // Verificar si 'questions' está definida
 if (typeof questions === 'undefined' || questions.length === 0) {
@@ -70,43 +70,6 @@ function nextQuestion() {
 // Añadir el botón de siguiente pregunta
 document.getElementById("nextBtn").onclick = nextQuestion;
 
-// ===================== FUNCIONES DE AUTENTICACIÓN =====================
-
-// Función para iniciar sesión
-async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  try {
-    const userCredential = await auth.signInWithEmailAndPassword(email, password);
-    console.log("Usuario autenticado:", userCredential.user);
-    showMenu();  // Mostrar el menú después de autenticarse
-  } catch (error) {
-    console.error("Error al iniciar sesión:", error.message);
-    showLoginError(error.message);  // Mostrar mensaje de error en la interfaz
-  }
-}
-
-// Mostrar error de inicio de sesión
-function showLoginError(msg) {
-  const loginErrorEl = document.getElementById("loginError");
-  loginErrorEl.style.display = "block";
-  loginErrorEl.textContent = msg;
-}
-
-// Mostrar la pantalla de login
-function showLoginScreen() {
-  const loginEl = document.getElementById("login");
-  const menuEl = document.getElementById("menu");
-  const testEl = document.getElementById("test");
-  const blockMsgEl = document.getElementById("blockMsg");
-
-  loginEl.style.display = "block";
-  testEl.style.display = "none";
-  menuEl.style.display = "none";
-  blockMsgEl.style.display = "none";
-}
-
 // ===================== FUNCIONES DE MENÚ Y TEST =====================
 
 // Mostrar el menú principal
@@ -125,6 +88,26 @@ function showMenu() {
   const h2 = document.createElement("h2");
   h2.textContent = "Selecciona un bloque de preguntas";
   menuEl.appendChild(h2);
+
+  // Agregar bloques de preguntas al menú
+  const blockButton = document.createElement("button");
+  blockButton.textContent = "Bloque 1";
+  blockButton.onclick = () => startTest();
+  menuEl.appendChild(blockButton);
+}
+
+// Iniciar el cuestionario
+function startTest() {
+  const menuEl = document.getElementById("menu");
+  const testEl = document.getElementById("test");
+
+  // Ocultar el menú
+  menuEl.style.display = "none";
+  testEl.style.display = "block";
+
+  // Cargar las preguntas
+  currentBlock = getBlockQuestions(currentIndex);
+  showQuestion(currentIndex);
 }
 
 // Cerrar sesión
