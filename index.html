@@ -42,15 +42,15 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // Configuración de Firebase
+  // Configuración de Firebase con las nuevas credenciales
   const firebaseConfig = {
-    apiKey: "AIzaSyA8Cx38i-rvc-RX4zaEU8b2_ONVj7Rfy2Y",
-    authDomain: "word-3bcb4.firebaseapp.com",
-    projectId: "word-3bcb4",
-    storageBucket: "word-3bcb4.firebasestorage.app",
-    messagingSenderId: "933335373972",
-    appId: "1:933335373972:web:cba07eb5e8b64949b0fc81",
-    measurementId: "G-F4QSBQLS5T"
+    apiKey: "NUEVO_API_KEY",
+    authDomain: "NUEVO_AUTH_DOMAIN",
+    projectId: "NUEVO_PROJECT_ID",
+    storageBucket: "NUEVO_STORAGE_BUCKET",
+    messagingSenderId: "NUEVO_MESSAGING_SENDER_ID",
+    appId: "NUEVO_APP_ID",
+    measurementId: "NUEVO_MEASUREMENT_ID"
   };
 
   // Inicializa Firebase
@@ -61,7 +61,6 @@
 
   // =================== FUNCIONES DE AUTENTICACIÓN ===================
   
-  // Iniciar sesión con correo y contraseña
   async function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -69,28 +68,25 @@
     try {
       await auth.signInWithEmailAndPassword(email, password);
       alert('Inicio de sesión exitoso');
-      showMenu();  // Muestra el menú después de iniciar sesión
+      showMenu();
     } catch (error) {
       console.error('Error al iniciar sesión:', error.message);
       showLoginError(error.message);
     }
   }
 
-  // Mostrar error en el login
   function showLoginError(msg) {
     const loginErrorEl = document.getElementById("loginError");
     loginErrorEl.style.display = "block";
     loginErrorEl.textContent = msg;
   }
 
-  // Limpiar el error del login
   function clearLoginError() {
     const loginErrorEl = document.getElementById("loginError");
     loginErrorEl.style.display = "none";
     loginErrorEl.textContent = "";
   }
 
-  // Mostrar la pantalla de login
   function showLoginScreen() {
     const loginEl = document.getElementById("login");
     const menuEl = document.getElementById("menu");
@@ -103,62 +99,9 @@
     blockMsgEl.style.display = "none";
   }
 
-  // =================== FUNCIONES DE MENÚ Y TEST ===================
-  
-  // Mostrar el menú principal
-  function showMenu() {
-    const loginEl = document.getElementById("login");
-    const menuEl = document.getElementById("menu");
-    const testEl = document.getElementById("test");
-    const blockMsgEl = document.getElementById("blockMsg");
-    
-    loginEl.style.display = "none";
-    testEl.style.display = "none";
-    blockMsgEl.style.display = "none";
-    menuEl.style.display = "block";
-    
-    menuEl.innerHTML = "";  // Limpiar el contenido del menú
-    
-    const h2 = document.createElement("h2");
-    h2.textContent = "Selecciona un bloque de preguntas";
-    menuEl.appendChild(h2);
-  }
-
-  // Cerrar sesión
-  async function logout() {
-    try {
-      await auth.signOut();
-      alert('Has cerrado sesión');
-      showLoginScreen();  // Mostrar la pantalla de login nuevamente
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error.message);
-    }
-  }
-
-  // =================== FUNCIONES DE FIRESTORE ===================
-  
-  // Guardar progreso del usuario
-  async function saveProgress(user) {
-    try {
-      await db.collection("progress").doc(user.uid).set(state);
-    } catch (error) {
-      console.error("Error al guardar el progreso:", error);
-    }
-  }
-
-  // Cargar el progreso del usuario
-  async function loadProgress(user) {
-    try {
-      const doc = await db.collection("progress").doc(user.uid).get();
-      state = doc.exists ? doc.data() : {}; // Si no hay datos, inicializa el estado vacío
-    } catch (error) {
-      console.error("Error al cargar el progreso:", error);
-    }
-  }
-
 </script>
 
-<script src="questions.js?v=3"></script> <!-- Asegúrate de que questions.js esté cargado antes -->
+<script src="questions.js?v=3"></script>
 <script src="app.js?v=3"></script>
 
 </body>
