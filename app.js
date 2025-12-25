@@ -1,6 +1,6 @@
-// Importa las funciones necesarias de Firebase SDK v9+
+// Importar las funciones necesarias de Firebase SDK v9+
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";  // Corregido el método de Analytics
+import { getAnalytics } from "firebase/analytics";  // Correcta importación de Analytics
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -16,7 +16,7 @@ const firebaseConfig = {
 // Inicializa Firebase
 const app = initializeApp(firebaseConfig);
 
-// Inicializa Firebase Analytics
+// Inicializa Firebase Analytics (usando getAnalytics)
 const analytics = getAnalytics(app);
 
 // Inicialización de la variable de estado
