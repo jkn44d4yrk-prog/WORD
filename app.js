@@ -1,5 +1,7 @@
-// Variables de estado para manejar el flujo del cuestionario
+// Inicialización de la variable de estado
 let state = { history: [], attempts: {} };
+
+// Asegúrate de que las demás variables también se definan antes de su uso:
 let currentBlock = [];
 let currentIndex = 0;
 
@@ -54,6 +56,8 @@ function selectAnswer(index, selectedOption) {
 // Función para ir a la siguiente pregunta
 function nextQuestion() {
   currentIndex++;
+  
+  // Verifica que no estemos fuera de los límites del array de preguntas
   if (currentIndex < questions.length) {
     showQuestion(currentIndex);
   } else {
