@@ -462,4 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loginEl.style.display = "none";
     await loadProgress(user);
-   
+    showMenu();
+  });
+
+});
