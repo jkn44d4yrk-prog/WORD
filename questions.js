@@ -21,9 +21,6 @@ const questions = [
     },
     correct: "B"
   },
-  // Puedes agregar más preguntas aquí...
-];
-  },
   {
     "id": 3,
     "question": "3. ¿Qué opción permite la creación de un índice automático en Word 365?",
